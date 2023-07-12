@@ -85,7 +85,7 @@ public class GlobalWebMvcConfig implements WebMvcConfigurer {
                 String uri = request.getRequestURI();
                 if(e instanceof CommonException){
                     //CommonExecption为自定义异常类
-                    printWrite(ResResultCode.CUSTOM_ERROR_MESSAGE,((CommonException) e).getMsg(),((CommonException) e).getData(), uri, mv);
+                    printWrite(ResResultCode.CUSTOM_ERROR_MESSAGE,((CommonException) e).getResultCode().getMessage(),((CommonException) e).getResultCode().getCode(), uri, mv);
                 } else {
                     printWrite(ResResultCode.DEFAULT_ERROR_MESSAGE,e.getMessage(),null, uri, mv);
                 }

@@ -70,4 +70,6 @@ public class MenuVo implements Serializable {
      * 子菜单集合
      */
     List<MenuVo> childMenu;
+
+    private boolean leaf;
 }

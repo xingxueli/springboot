@@ -5,7 +5,8 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: "jdbc:mysql://localhost:3306/menu_auth_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai"
       username: root
-      password: Hello@123456
+      password:
+#      password: Hello@123456
       initial-size: 1
       min-idle: 1
       max-active: 300

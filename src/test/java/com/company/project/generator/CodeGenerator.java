@@ -29,7 +29,8 @@ public class CodeGenerator {
     /**
      * JDBC数据源密码配置
      */
-    private static String jdbcPassword = "Hello@123456";
+//    private static String jdbcPassword = "Hello@123456";
+    private static String jdbcPassword = "";
 
     /**
      * JDBC数据源驱动配置
@@ -70,7 +71,7 @@ public class CodeGenerator {
      * 指定表
      */
     private static String[] tableNames = {
-            "tb_user","tb_user_role","tb_role","tb_role_menu","tb_menu"
+            "tb_role_menu_file"
     };
 
     public static void main(String[] args) {

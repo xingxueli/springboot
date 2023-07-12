@@ -1,59 +1,64 @@
 package com.company.project.core.execption;
 
+import com.company.project.entity.vo.BusinessResultCode;
+import com.company.project.entity.vo.IResultCode;
+
 public class CommonException extends RuntimeException {
 
-    /**错误码*/
-    private String code;
+    /**
+     * 异常的返回码x
+     */
+    private IResultCode resultCode;
 
-    /**错误信息*/
-    private String msg;
-
-    /**错误对象*/
-    private Object data;
-
-    public String getCode() {
-        return code;
+    /**
+     * 不指定任何参数返回码默认为FAILED
+     */
+    public CommonException(){
+        this.resultCode = BusinessResultCode.FAILED;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    /**
+     * 默认返回的FAILED可以自定义提示信息
+     *
+     * @param message a {@link java.lang.String} object.
+     */
+    public CommonException(String message){
+        super(message);
+        this.resultCode = BusinessResultCode.FAILED;
+    }
+    public CommonException(String message,Exception e){
+        super(message,e);
+        this.resultCode = BusinessResultCode.FAILED;
     }
 
-    public String getMsg() {
-        return msg;
+    /**
+     * 指定对应具体业务的返回码
+     *
+    public CommonException(IResultCode resultCode){
+        super(resultCode.getMessage());
+        this.resultCode = resultCode;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    /**
+     * 指定对应具体业务的返回码 可以自定义提示信息
+     *
+     * @param message a {@link java.lang.String} object.
+     */
+    public CommonException(IResultCode resultCode,String message){
+        super(message);
+        this.resultCode = resultCode;
     }
 
-    public Object getData() {
-        return data;
+    public CommonException(IResultCode resultCode) {
+        super(resultCode.getMessage());
+        this.resultCode = resultCode;
     }
 
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    public CommonException(String msg) {
-        super(msg);
-        this.msg = msg;
-    }
-
-    public CommonException(String msg, Object data) {
-        super(msg);
-        this.msg = msg;
-        this.data = data;
-    }
-
-    public CommonException(String msg, Throwable cause) {
-        super(msg, cause);
-        this.msg = msg;
-    }
-
-    public CommonException(String msg, Object data, Throwable cause) {
-        super(msg, cause);
-        this.msg = msg;
-        this.data = data;
+    /**
+     * <p>Getter for the field <code>resultCode</code>.</p>
+     *
+     */
+    public IResultCode getResultCode(){
+        return this.resultCode;
     }
 }

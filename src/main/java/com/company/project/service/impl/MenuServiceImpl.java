@@ -125,6 +125,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 if(parentId.longValue() == source.getParentId().longValue()){
                     MenuVo menuVo = new MenuVo();
                     BeanUtils.copyProperties(source, menuVo);
+                    menuVo.setLeaf(source.getNodeType().intValue() == 2);
                     //查询子菜单，并封装
                     List<MenuVo> childList = transferMenuVo(allMenu, source.getId());
                     if(!CollectionUtils.isEmpty(childList)){
