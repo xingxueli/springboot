@@ -19,6 +19,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * <p>
@@ -82,7 +83,7 @@ public class FileController {
         // 获得待下载文件所在文件夹的绝对路径
         String realPath =file.getPath();
         // 设置响应头、以附件形式打开文件
-        response.setHeader("content-disposition", "attachment; fileName=" + file.getName());
+        response.setHeader("content-disposition", "attachment; fileName=" + URLEncoder.encode(file.getName(),"UTF-8"));
         //获得输出流对象
         ServletOutputStream outputStream = response.getOutputStream();
         byte[] data = file.getBinData();

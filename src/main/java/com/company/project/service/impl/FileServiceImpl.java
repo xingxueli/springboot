@@ -35,7 +35,8 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
         //rename file 重命名
         String originalName = FileUtils.getOriginalFilename(file.getOriginalFilename());
         String newName = originalName + "_" + DateUtil.formatDateTime(new Date());
-        fileName = FileUtils.rename(file, newName);
+//        fileName = FileUtils.rename(file, newName);
+        fileName = file.getOriginalFilename();
         //最后真实的相对路径（数据库中保存的路径）
         path = "root" + "/" + fileName;
 

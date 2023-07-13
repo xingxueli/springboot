@@ -24,13 +24,12 @@ public class CodeGenerator {
     /**
      * JDBC数据源账号配置
      */
-    private static String jdbcUserName = "root";
+    private static String jdbcUserName = "hirect";
 
     /**
      * JDBC数据源密码配置
      */
-//    private static String jdbcPassword = "Hello@123456";
-    private static String jdbcPassword = "";
+    private static String jdbcPassword = "glitzstar";
 
     /**
      * JDBC数据源驱动配置
