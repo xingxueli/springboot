@@ -2,15 +2,12 @@ package com.company.project.web;
 
 
 import com.company.project.core.annotation.CheckPermissions;
+import com.company.project.entity.Menu;
 import com.company.project.entity.dto.BaseDto;
 import com.company.project.entity.vo.MenuVo;
 import com.company.project.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,4 +41,12 @@ public class MenuController {
     public List<MenuVo> queryMenus(BaseDto request){
         return menuService.queryMenus(request.getUserId());
     }
+    @PostMapping(value = "/create")
+    public Menu create(@RequestBody Menu param){
+
+        menuService.addMenu(param);
+
+        return param;
+    }
+
 }

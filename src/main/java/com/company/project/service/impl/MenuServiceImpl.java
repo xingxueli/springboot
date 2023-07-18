@@ -44,7 +44,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public void addMenu(Menu menu) {
         //如果插入的当前节点为根节点，parentId指定为0
-        if(menu.getParentId().longValue() == 0){
+        if(menu.getParentId() == 0){
             menu.setLevel(1);//根节点层级为1
             menu.setPath(null);//根节点路径为空
         }else{
@@ -52,7 +52,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             if(parentMenu == null){
                 throw new CommonException("未查询到对应的父节点");
             }
-            menu.setLevel(parentMenu.getLevel().intValue() + 1);
+            menu.setLevel(parentMenu.getLevel() + 1);
             if(StringUtils.isNotEmpty(parentMenu.getPath())){
                 menu.setPath(parentMenu.getPath() + "," + parentMenu.getId());
             }else{
