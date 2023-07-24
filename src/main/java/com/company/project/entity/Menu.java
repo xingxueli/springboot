@@ -1,6 +1,5 @@
 package com.company.project.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -102,7 +101,5 @@ public class Menu implements Serializable {
      */
     @TableField("catalog")
     private String catalog;
-
-
 
 }

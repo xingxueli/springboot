@@ -2,6 +2,7 @@ package com.company.project.dao;
 
 import com.company.project.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>

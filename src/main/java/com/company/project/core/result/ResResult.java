@@ -12,7 +12,7 @@ public class ResResult {
     private String msg;
 
     /**返回结果*/
-    private Object result;
+    private Object data;
 
     /**服务器当前时间戳*/
     private Long timestamp = System.currentTimeMillis();
@@ -41,16 +41,16 @@ public class ResResult {
         this.msg = msg;
     }
 
-    public Object getResult() {
-        return result;
-    }
-
-    public void setResult(Object result) {
-        this.result = result;
-    }
-
     public Long getTimestamp() {
         return timestamp;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public void setTimestamp(Long timestamp) {
@@ -66,7 +66,7 @@ public class ResResult {
         this.path =  path;
         this.code = ResResultCode.SUCCESS.getCode();
         this.msg = ResResultCode.SUCCESS.getMsg();
-        this.result = data;
+        this.data = data;
     }
 
     public ResResult(ResResultCode resultEnum) {
@@ -78,6 +78,6 @@ public class ResResult {
         this.path =  uri;
         this.code = resultEnum.getCode();
         this.msg = resultEnum.getMsg();
-        this.result = data;
+        this.data = data;
     }
 }

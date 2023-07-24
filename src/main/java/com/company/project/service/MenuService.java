@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface MenuService extends IService<Menu> {
 
-    void addMenu(Menu menu);
+    Menu addMenu(Menu menu);
 
     List<MenuVo> queryMenuTree();
 

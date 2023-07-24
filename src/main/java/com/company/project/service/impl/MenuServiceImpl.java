@@ -1,5 +1,6 @@
 package com.company.project.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.company.project.core.execption.CommonException;
@@ -7,11 +8,13 @@ import com.company.project.entity.Menu;
 import com.company.project.dao.MenuMapper;
 import com.company.project.entity.RoleMenu;
 import com.company.project.entity.UserRole;
+import com.company.project.entity.vo.MenuMeta;
 import com.company.project.entity.vo.MenuVo;
 import com.company.project.service.MenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.company.project.service.RoleMenuService;
 import com.company.project.service.UserRoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,7 @@ import java.util.Set;
  * @since 2020-06-28
  */
 @Service
+@Slf4j
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 
     @Autowired
@@ -41,34 +45,39 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Autowired
     private RoleMenuService roleMenuService;
 
+    private final long rootParentId = 1;
+
     @Override
-    public void addMenu(Menu menu) {
+    public Menu addMenu(Menu menu) {
+        log.info("addMenu="+ JSON.toJSONString(menu));
         //如果插入的当前节点为根节点，parentId指定为0
-        if(menu.getParentId() == 0){
+        if(menu.getParentId() == null || menu.getParentId().longValue() == rootParentId){
             menu.setLevel(1);//根节点层级为1
             menu.setPath(null);//根节点路径为空
+            menu.setParentId(rootParentId);
         }else{
             Menu parentMenu = baseMapper.selectById(menu.getParentId());
             if(parentMenu == null){
                 throw new CommonException("未查询到对应的父节点");
             }
-            menu.setLevel(parentMenu.getLevel() + 1);
+            menu.setLevel(parentMenu.getLevel().intValue() + 1);
             if(StringUtils.isNotEmpty(parentMenu.getPath())){
-                menu.setPath(parentMenu.getPath() + "," + parentMenu.getId());
+                menu.setCatalog(parentMenu.getPath() + "," + parentMenu.getId());
             }else{
-                menu.setPath(parentMenu.getId().toString());
+                menu.setCatalog(parentMenu.getId().toString());
             }
         }
         //可以使用雪花算法，生成ID
-        menu.setId(System.currentTimeMillis());
+//        menu.setId(System.currentTimeMillis());
         super.save(menu);
+        return menu;
     }
 
     @Override
     public List<MenuVo> queryMenuTree() {
         Wrapper queryObj = new QueryWrapper<>().orderByAsc("level","sort");
         List<Menu> allMenu = super.list(queryObj);
-        List<MenuVo> resultList = transferMenuVo(allMenu, 0L);
+        List<MenuVo> resultList = transferMenuVo(allMenu, rootParentId);
         return resultList;
     }
 
@@ -103,7 +112,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                     }
                     //查询对应的所有菜单,并进行封装展示
                     List<Menu> allMenus = super.list(new QueryWrapper<Menu>().in("id", new ArrayList<>(allMenuIds)));
-                    List<MenuVo> resultList = transferMenuVo(allMenus, 0L);
+                    List<MenuVo> resultList = transferMenuVo(allMenus, rootParentId);
                     return resultList;
                 }
             }
@@ -125,11 +134,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 if(parentId.longValue() == source.getParentId().longValue()){
                     MenuVo menuVo = new MenuVo();
                     BeanUtils.copyProperties(source, menuVo);
+                    //set MenuMeta
+                    MenuMeta menuMeta = new MenuMeta();
+                    menuMeta.setIcon(source.getIcon());
+                    menuMeta.setTitle(source.getName());
+                    menuVo.setMeta(menuMeta);
                     menuVo.setLeaf(source.getNodeType().intValue() == 2);
                     //查询子菜单，并封装
                     List<MenuVo> childList = transferMenuVo(allMenu, source.getId());
                     if(!CollectionUtils.isEmpty(childList)){
-                        menuVo.setChildMenu(childList);
+                        menuVo.setChildren(childList);
                     }
                     resultList.add(menuVo);
                 }
