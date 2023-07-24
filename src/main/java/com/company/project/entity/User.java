@@ -35,7 +35,16 @@ public class User implements Serializable {
      */
     @TableField("mobile")
     private String mobile;
-
+    /**
+     * 登录用户名
+     */
+    @TableField("username")
+    private String username;
+    /**
+     * 头像
+     */
+    @TableField("avatar")
+    private String avatar;
     /**
      * 姓名
      */

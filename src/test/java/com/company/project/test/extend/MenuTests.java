@@ -15,7 +15,6 @@ public class MenuTests extends JunitTester {
     public void addMenu() throws InterruptedException {
         Menu menu = new Menu();
         menu.setName("角色管理-查询");
-        menu.setMenuCode("roleMgr:list");
         menu.setParentId(1593333386337l);
         menu.setNodeType(3);
         menu.setSort(1);
@@ -24,7 +23,6 @@ public class MenuTests extends JunitTester {
 
         Menu menu1 = new Menu();
         menu.setName("角色管理-新增");
-        menu.setMenuCode("roleMgr:add");
         menu.setParentId(1593333386337l);
         menu.setNodeType(3);
         menu.setSort(2);
@@ -33,7 +31,6 @@ public class MenuTests extends JunitTester {
 
         Menu menu2 = new Menu();
         menu.setName("角色管理-删除");
-        menu.setMenuCode("roleMgr:delete");
         menu.setParentId(1593333386337l);
         menu.setNodeType(3);
         menu.setSort(3);

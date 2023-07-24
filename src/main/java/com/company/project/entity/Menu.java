@@ -1,5 +1,6 @@
 package com.company.project.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -37,10 +38,10 @@ public class Menu implements Serializable {
     private String name;
 
     /**
-     * 菜单编码
+     * component   目前有3种 1、Layout  2、EmptyLayout  3、@/views/vab/variableViews/index
      */
-    @TableField("menu_code")
-    private String menuCode;
+    @TableField("component")
+    private String component;
 
     /**
      * 父节点
@@ -55,10 +56,10 @@ public class Menu implements Serializable {
     private Integer nodeType;
 
     /**
-     * 图标地址
+     * 图标地址    icon: 'home'  icon: 'bug'   icon: 'users-cog'   icon: 'cloud'  icon: 'shopping-cart'
      */
-    @TableField("icon_url")
-    private String iconUrl;
+    @TableField("icon")
+    private String icon;
 
     /**
      * 排序号
@@ -67,10 +68,10 @@ public class Menu implements Serializable {
     private Integer sort;
 
     /**
-     * 页面对应的地址
+     * redirect    '/index'    'noRedirect'   两种
      */
-    @TableField("link_url")
-    private String linkUrl;
+    @TableField("redirect")
+    private String redirect;
 
     /**
      * 层次
@@ -79,7 +80,7 @@ public class Menu implements Serializable {
     private Integer level;
 
     /**
-     * 树id的路径 整个层次上的路径id，逗号分隔，想要找父节点特别快
+     * path: '/vab' 一级路径带/   path: 'vviews'   树id的路径 整个层次上的路径id，逗号分隔，想要找父节点特别快
      */
     @TableField("path")
     private String path;
@@ -89,6 +90,19 @@ public class Menu implements Serializable {
      */
     @TableField("is_delete")
     private Integer isDelete;
+
+    /**
+     * 项目id
+     */
+    @TableField("project_id")
+    private Long projectId;
+
+    /**
+     * 树id的路径 整个层次上的路径id，逗号分隔，想要找父节点特别快
+     */
+    @TableField("catalog")
+    private String catalog;
+
 
 
 }

@@ -12,6 +12,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -20,7 +21,7 @@ import java.util.Objects;
 @Component
 public class CheckPermissionsAspect {
 
-    @Autowired
+    @Resource
     private MenuMapper menuMapper;
 
     @Pointcut("@annotation(com.company.project.core.annotation.CheckPermissions)")
