@@ -1,11 +1,10 @@
 package com.company.project.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -16,21 +15,20 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author pzblog
- * @since 2020-06-28
+ * @since 2023-07-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("tb_menu")
-public class Menu implements Serializable {
+@TableName("tb_routes")
+public class Routes implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @TableId("id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
@@ -104,5 +102,8 @@ public class Menu implements Serializable {
      */
     @TableField("catalog")
     private String catalog;
+
+    @TableField("title")
+    private String title;
 
 }

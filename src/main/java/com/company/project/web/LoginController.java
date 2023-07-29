@@ -30,4 +30,9 @@ public class LoginController {
         }
         return Maps.of("accessToken", JwtUtil.createAppToken(String.valueOf(dbUser.getId()),dbUser.getName())).build();
     }
+
+    @PostMapping(value = "/logout")
+    public void logout(){
+
+    }
 }

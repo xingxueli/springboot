@@ -19,7 +19,7 @@ public class CodeGenerator {
     /**
      * JDBC数据源连接配置
      */
-    private static String jdbcUrl = "jdbc:mysql://localhost:3306/menu_auth_db";
+    private static String jdbcUrl = "jdbc:mysql://mysql-w-test.hirect.ai:3306/menu_auth_db";
 
     /**
      * JDBC数据源账号配置
@@ -70,7 +70,7 @@ public class CodeGenerator {
      * 指定表
      */
     private static String[] tableNames = {
-            "tb_role_menu_file"
+            "tb_routes"
     };
 
     public static void main(String[] args) {

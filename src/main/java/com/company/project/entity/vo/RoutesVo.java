@@ -1,6 +1,6 @@
 package com.company.project.entity.vo;
 
-import com.company.project.entity.Menu;
+import com.company.project.entity.Routes;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -10,11 +10,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class MenuVo extends Menu {
+public class RoutesVo extends Routes {
     /**
      * 子菜单集合
      */
-    private List<MenuVo> children;
-    private Boolean leaf;
-    private List<String> catalogList;
+    private List<RoutesVo> children;
+    private RoutesMeta meta;
 }
